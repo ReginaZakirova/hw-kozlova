@@ -1,0 +1,86 @@
+/* Table Mendeleeva */
+
+.table__title {
+    margin-top: 30px;
+    font-size: 24px;
+    text-align: center;
+    color: #000;
+}
+
+.table {
+    margin: 0 auto;
+}
+
+td {
+    width: 110px;
+}
+
+table, td {
+    border: 1px solid black;
+    border-spacing: 0.1px 0.1px; 
+}
+
+.red {
+    background-color: #df96a1;
+}
+
+.yellow {
+    background-color: #f6e65d;
+}
+
+.blue {
+    background-color: #a6ccde;
+}
+
+.table__item-link {
+    color: #000; 
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.table__item-link:hover {
+    opacity: 0.5; 
+}
+
+.table__item-elements {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: right;
+    border: 1px solid rgb(200, 200, 200, 0.05);  
+}
+
+.element {
+    display: flex;
+    justify-content: space-between;    
+}
+
+.table__item-elements p {
+    margin: 0;
+    padding: 0;
+}
+  
+.element__item {
+    text-align: left;
+}
+
+.number {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: right;
+}
+
+.symbol { 
+    font-size: 2.1em;
+}
+
+.name {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.mass {
+    font-weight: 400;
+    text-align: right;
+}

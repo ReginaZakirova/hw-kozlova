@@ -1,0 +1,200 @@
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 50px;
+    height: 100px;
+    font-size: 16px;
+    background: linear-gradient(135deg, #5fc3e4 0%, #e55d87 100%);
+    border-radius: 20px;  
+}
+
+.header__logo {
+    margin: 10px 0 0 10px;
+    width: 70px;
+    height: auto;
+}
+
+/* Nav */
+.header__nav {
+    margin-top: 25px;
+}
+
+.header__nav-item {
+    list-style-type: none;
+}
+
+.header__nav-list {
+    display: flex;
+}
+
+.header__nav-link { 
+    margin-left: 20px;
+    color: #000;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: 0.4s;
+}
+
+.header__nav-link:hover { 
+    color: #fff;
+    opacity: .75;
+}
+
+/* Main */
+.container {
+    display: flex;
+    gap: 10px;
+}
+
+.container-item {
+    display: flex;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.sidebar {
+    width: 40%;  
+}
+
+.sidebar-item img {
+    max-width: 100%;
+    height: auto;
+    background-size: cover;
+    border-radius: 20px;
+}
+
+.about {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.about__info {
+    display: flex;
+    gap: 10px;
+}
+
+.about__fio {
+    height: 80px;
+    background-color: #f3d3f6;
+    border-radius: 20px;   
+}
+
+.name {
+    font-size: 30px;
+    text-align: center;  
+}
+
+.about__info {
+    font-size: 24px;
+    height: 100%;
+}
+
+.about__info-item {
+    height: 100%;
+}
+
+.about__me {
+    min-width: 50%;
+    padding: 5px 15px 0;
+    background-color: #e0f4e0;
+    border-radius: 20px;
+}
+
+.like {
+    /* width: 38%; */
+    padding: 5px 15px 0;
+    background-color: #fbf8bd;
+    border-radius: 20px;
+}
+
+.list {
+    padding: 0 0 0 10px;
+    font-weight: 700;
+}
+
+.list-item {
+    margin-left: 30px;
+    padding-left: 5px;
+    font-weight: 500;
+    list-style-type:circle;
+}
+
+/* Мои работы */
+.projects__title {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.projects__title h2 {
+    position: relative;
+    color: rgb(51, 16, 83); 
+    display: inline-block;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    font-size: 32pt;
+    padding: 11px 60px;
+    margin: 0; 
+    line-height: 1;
+}
+
+.projects__title h2:before,
+.projects__title h2:after {
+    content: ""; 
+    position: absolute;
+    top: 0;
+    width: 30px;
+    height: 100%;
+    border-left: 2px solid;
+    border-right: 2px solid;
+    background: repeating-linear-gradient(180deg, transparent, transparent 2px, rgb(51, 16, 83) 2px, rgb(51, 16, 83) 4px);
+}
+
+.projects__title h2:before {
+    left: 0;
+}
+
+.projects__title h2:after {
+    right: 0;
+}
+  
+.grid {
+    display: grid;
+    grid-template-columns: 400px 400px;
+    gap: 30px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.project {
+    display: grid;
+    text-decoration: none;
+}
+
+.project-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: left top;
+}
+
+.progect-title {
+    margin: 0;
+    padding: 15px;
+    text-align: center;
+    color: #fff;
+    background-color:#333;   
+}
+
+.flex {
+    display: flex;
+    gap: 10px;
+    margin: 10px auto;
+    justify-content: space-around;
+}
+
+.flex img {
+    width: 350px;
+    height: 250px;
+}

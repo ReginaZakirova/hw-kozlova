@@ -1,3 +1,6 @@
+
+<?php
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +15,7 @@
      <!--        Шапка сайта-->
      <header class="header">
           <div>
-               <a href="index.html">
+               <a href="index.php">
                     <img class="header__logo" src="img/logo.png" alt="logo">
                </a>
           </div>
@@ -21,6 +24,9 @@
                <ul class="header__nav-list">
                     <li class="header__nav-item"><a class="header__nav-link" href="table.html">Таблица</a></li>
                     <li class="header__nav-item"><a class="header__nav-link" href="#projects">Проекты</a></li>
+                    <li class="header__nav-item"><a class="header__nav-link" href="cycles.php">Циклы</a></li>
+                    <li class="header__nav-item"><a class="header__nav-link" href="arrays.php">Массивы</a></li>
+                    <li class="header__nav-item"><a class="header__nav-link" href="lines.php">Строки</a></li>
                </ul>
           </nav>
      </header>
@@ -92,7 +98,7 @@
                        <img class="project-img" src="img/projects/travel.jpg" alt="project image">
                        <p class="progect-title">Проект "Travel"</p>
                    </a>
-                   <!-- <a href="#" target="_blank" class="project">
+                   <a href="#" target="_blank" class="project">
                        <img class="project-img" src="img/projects/mogo.jpg" alt="project image">
                        <p class="progect-title">Проект "MoGo"</p>
                    </a>
@@ -107,9 +113,9 @@
                    <a href="#" target="_blank" class="project">
                        <img class="project-img" src="img/projects/aim.jpg" alt="project image">
                        <p class="progect-title">Проект "Игра "Aim"</p>
-                   </a> -->
+                   </a>
                </div>
-               <div class="flex">
+               <!-- <div class="grid_horizontal">
                     <a href="#" target="_blank" class="project">
                         <img class="project-img" src="img/projects/mogo.jpg" alt="project image">
                         <p class="progect-title">Проект "MoGo"</p>
@@ -126,8 +132,10 @@
                         <img class="project-img" src="img/projects/aim.jpg" alt="project image">
                         <p class="progect-title">Проект "Игра "Aim"</p>
                     </a>
-                </div>
+                </div> -->
           </section>
      </main>     
 </body>
 </html>
+
+<?php

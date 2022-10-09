@@ -139,14 +139,6 @@
 
 
 <?php
-
-$birthDay = "20-07-1989";
-$interim = date("j-m-Y");
-$bDay = date_create('20-07-1989');
-$today = date_create($interim);
-$diff = date_diff($bDay, $today);
-
-
 $html = '<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -205,7 +197,7 @@ $html = '<!DOCTYPE html>
                                         <li class="list-item">Responsive Web Design (freeCodeCamp)</li>
                                    </ul>
                                    <ul class="list">Дата рождения:
-                                   <li class="list-item">' . $birthDay . '</li>
+                                   <li class="list-item">20-07-1989</li>
                               </ul>
                               </div>';
                               $aboutCourse =  '
@@ -287,6 +279,16 @@ $html = '<!DOCTYPE html>
 </body>
 </html>';
 
+function calculateDate ($val) {
+     $interim = date("j-m-Y");
+     $bDay = date_create($val);
+     $today = date_create($interim);
+     $diff = date_diff($bDay, $today);
+     $array['interim'] = $interim;
+     $array['diff'] = $diff;
+     return $array;
+}
+
 $dom = new DOMDocument();
 
 $dom->loadHTML($aboutCourse);
@@ -299,26 +301,26 @@ foreach($arrTextOne as $kk => $val){
      if ($element == '' || mb_strlen($val) <= 1 && $val != 'В') {
           continue;
      }
-     $arrChetnieNechetnie[] = $val;
+     $arrEvenAndOdd[] = $val;
 }
 
-foreach ($arrChetnieNechetnie as $kkk => $vvv) {
+foreach ($arrEvenAndOdd as $kkk => $vvv) {
      if($kkk % 2 == 0) {
-          $chetnie[] = $vvv;
+          $even[] = $vvv;
      }else {
-          $nechetnie[] = $vvv;
+          $odd[] = $vvv;
      }
 }
-
-
-foreach ($chetnie as $value) {
+//окрашивание слов в разные цвета (четные и нечетные)
+foreach ($even as $value) {
      $aboutCourse = str_replace($value, "<i style='color:red'>$value</i>", $aboutCourse);
 }
 
-foreach ($nechetnie as $value) {
+foreach ($odd as $value) {
      $aboutCourse = str_replace($value, "<i style='color:green'>$value</i>", $aboutCourse);
 }
 
+//окрашивание первой фразы в красный цвет
 $html = str_replace("Виктория Козлова", "<h1 class='name' style='color:red'>Виктория Козлова</h1>", $html);
 echo $html . $aboutCourse . $ostatokHtml ;
 
@@ -331,32 +333,45 @@ $dom->loadHTML($ostatokHtml);
 $three = $dom->textContent;
 $arrTextThree = explode(' ', $three);
 
-// echo '<pre>';
-// print_r($arrText);
-// echo '</pre>';
 
-$htmlAll = array_merge($arrTextOne, $arrTextThree, $arrText);
-$count = 0;
-$glasnayaAll = 0;
-foreach($htmlAll as $val){
-     $element = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $val);
-     
-     if ($element == '') {
-          continue;
+$htmlAll = array_merge($arrTextOne, $arrTextThree, $arrText); //объединяем массивы в один для подсчета
+
+//функция подсчета количества слов и гласных букв
+function calculateCountWordsAndVowel($arr) {
+     $count = 0;
+     $vowelAll = 0;
+     foreach($arr as $val){
+          $element = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $val);
+          
+          if ($element == '') {
+               continue;
+          }
+          $remainder = str_ireplace(['у','е', 'а', 'о', 'э', 'ё', 'я', 'и', 'ю', 'a', 'e', 'i', 'o', 'u', 'y', ' '], '', $element);
+          $vowelElement = mb_strlen($element) - mb_strlen($remainder); 
+          $count ++;
+          $vowelAll += $vowelElement;
+          
      }
-     $ostatok = str_ireplace(['у','е', 'а', 'о', 'э', 'ё', 'я', 'и', 'ю', 'a', 'e', 'i', 'o', 'u', 'y', ' '], '', $element);
-     $glasnayaElement = mb_strlen($element) - mb_strlen($ostatok); 
-     $count ++;
-     $glasnayaAll += $glasnayaElement;
+     $out['count'] = $count;
+     $out['vowel'] = $vowelAll;
+     return $out;
 }
-echo '<br>'. "На странице $count слов";
-echo '<br>'. "Должно получится 96 слов";
+
+
+$result = calculateCountWordsAndVowel($htmlAll); //передаем в функцию $htmlAll и возвращаем результат функции в переменную
+
+echo '<br>'. "На странице: " . $result['count']. " слов";
+echo '<br>'. "Должно получится: 99 слов";
 
 echo '<br>';
-echo "гласные буквы: $glasnayaAll";
+echo "Гласных букв: " . $result['vowel'];
 echo '<br>';
 
+$birthDay = "20-07-1989";
+$diffAndInterin = calculateDate($birthDay); //передаем в функцию дату рождения и возвращаем в переменную результат функции
+echo $diffAndInterin['diff']->format('%a дней') . " между $birthDay и " . $diffAndInterin['interim']; //выводим результат задания
 
-echo $diff->format('%a дней') . " между $birthDay и $interim";
+
+
 
 

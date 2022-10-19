@@ -115,6 +115,8 @@ $today = date_create($interim);
 $diff = date_diff($bDay, $today);
 echo $diff->format('%a дней') . " между $birthDay и $interim";
 
+include ('footer.php');
+
 
 
 

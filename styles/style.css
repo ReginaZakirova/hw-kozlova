@@ -1,5 +1,6 @@
 @import url(reset.css);
 @import url(table.css);
+@import url(footer.css);
 
 /* Header */
 .header {
@@ -237,4 +238,63 @@
     .about__info {
         flex-direction: column;
     }
+}
+
+/* Приветствие со страницы авторизации */
+
+.hello {
+    width: 400px;
+    height: 300px;
+    padding: 20px;
+    text-align: center;
+    background-color: rgba(255,255,255, 0.6);
+    border-radius: 25px;
+    color: #333;
+}
+
+.hello__logout:hover {
+    opacity: 0.8;
+    transition: all 0.2s ease;
+}
+
+.hello__link {
+    margin-left: 40%;
+    text-align: left;
+    display: block;
+    margin-top: 15px;
+    color: #000;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.hello__link img {
+    padding-right: 5px;
+    height: 15px;
+    color:#008997;
+    transition: all 0.3s ease;
+}
+
+.hello__link:hover img{
+    padding-right: 15px;
+    transition: all 0.3s ease;
+}
+
+.link__bitrix,
+.link__fact {
+    display: block;
+    font-size:25px;
+    text-decoration: none;
+}
+
+.link__bitrix {
+    color: green;
+}
+
+.link__fact {
+    color: red;
+}
+
+.link__bitrix:hover,
+.link__fact:hover {
+    text-decoration: underline dotted 0.7px #333;
 }

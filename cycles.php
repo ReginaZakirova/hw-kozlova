@@ -148,3 +148,5 @@ $res = $i - $k;
 for ($j = 0; $j <= $res; $j++) {
     echo $j . ', ';
 }
+
+include ('footer.php');

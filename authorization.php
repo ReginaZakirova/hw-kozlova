@@ -1,4 +1,17 @@
 <?php
+session_start();
+
+if($_POST['submit'] == 'Logout'){
+    session_destroy();
+    header("Location: ./authorization.php");
+}
+
+if(isset($_SESSION['login'])) {
+    $login = $_SESSION['login'];
+    $page = $_SESSION['page'];
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,28 +24,27 @@
     <link rel="stylesheet" href="styles/authorization.css">
     <title>Авторизация</title>
 </head>
-<body>
-    <!-- Шапка сайта -->
-    <!-- <header class="header">
-        <div>
-            <a href="index.php">
-                <img class="header__logo" src="img/logo.png" alt="logo">
-            </a>
-        </div> -->
-        <!--        Навигационное меню-->
-        <!-- <nav class="header__nav">
-            <ul class="header__nav-list">
-                <li class="header__nav-item"><a class="header__nav-link" href="table.html">Таблица</a></li>
-                <li class="header__nav-item"><a class="header__nav-link" href="#projects">Проекты</a></li>
-                <li class="header__nav-item"><a class="header__nav-link" href="cycles.php">Циклы</a></li>
-                <li class="header__nav-item"><a class="header__nav-link" href="arrays.php">Массивы</a></li>
-                <li class="header__nav-item"><a class="header__nav-link" href="lines.php">Строки</a></li>
-                <li class="header__nav-item"><a class="header__nav-link" href="authorization.php">Авторизация</a></li>
-            </ul>
-        </nav>
-    </header> -->
-    <!--        Main-->
+<body class="body">
     <main>
+
+        <?php if($login) :?>
+
+            <div class="hello">
+                <h1>Привет, <?php echo $login?>!</h1>
+                <?php
+                    if ($page) {
+                        echo "<h2>Твоя последняя страница, $page</h2>";
+                    }
+                ?>
+                <form action="#" method="post">
+                    <input class="btn hello__logout" type="submit" name="submit" value="Logout">
+                </form>
+                <a class="hello__link" href="./fact.php"><img src="img/arrow-right-solid.svg" class="arrow__right"></img>ФАКТ</a>
+                <a class="hello__link" href="./bitrix.php"><img src="img/arrow-right-solid.svg" class="arrow__right"></img></i>Битрикс</a>
+            </div>
+
+        <?php else: ?>
+
         <div class="container right-panel-active">
             <!-- Sign Up -->
             <div class="container__form container--signup">
@@ -68,6 +80,7 @@
                 </div>
             </div>
         </div>
+        <?php endif;?>
     </main>  
     <script src="js/main.js"></script>   
 </body>
@@ -75,22 +88,21 @@
 
 
 <?php
+session_start();
 
 $name = $_POST['name'];
 $pass = md5($_POST['pass']);
-
 
 $currentName = 'Anna'; //правильный логин
 $currentPassword = md5('password'); //правильный пароль
 
 if ($name && $pass) {
     if($name == $currentName && $pass == $currentPassword) {
-        header("Location: ./success.php");
+        $_SESSION['login'] = $name;
+        header("Location: ./authorization.php");
     }else {
         header("Location: ./fail.php");
     }
 }
 unset($_POST);
-
-
 ?>

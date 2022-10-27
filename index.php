@@ -15,9 +15,6 @@ if(isset($_SESSION['login'])) {
      echo 'Привет, ' . $_SESSION['login'];
 }
 
-
-
-
 ?>
 
 <!-- <!DOCTYPE html>
@@ -355,7 +352,6 @@ function calculateCountWordsAndVowel($arr) {
 $result = calculateCountWordsAndVowel($htmlAll); //передаем в функцию $htmlAll и возвращаем результат функции в переменную
 
 echo '<br>'. "На странице: " . $result['count']. " слов";
-echo '<br>'. "Должно получится: 99 слов";
 
 echo '<br>';
 echo "Гласных букв: " . $result['vowel'];
@@ -368,44 +364,11 @@ echo $diffAndInterin['diff']->format('%a дней') . " между $birthDay и 
 
 <!-- ====== session ====== -->
 <!-- session_destroy() - уничтожает все данные сессии -->
-<?php
-// $red = "<body bgcolor='red'>";
-// $blue = "<body bgcolor='blue'>";
-// $green = "<body bgcolor='green'>";
-// $color = ($_POST['do']);
 
-// if (isset($_POST['do'])) {
-//     if ($_POST['select'] == 'red') {
-//         $color = 'style = "background-color: red;"';
-//     }
-//     elseif ($_POST['select'] == 'blue') {
-//         $color = 'style = "background-color: blue;"';
-
-//     }
-//     elseif ($_POST['select'] == 'green') {
-//         $color = 'style = "background-color: green;"';
-//     }
-// }
-
-// if ($color == red) {
-//      echo $red;
-// } 
-// elseif ($color == blue) {
-//      echo $blue;
-// }
-// elseif ($color == green) {
-//      echo $green;
-// }
-// else {
-//      echo "<div bgcolor='#fff'>";
-// }
-
-
-?>
 <div class="div" style="width: 100%; height: 100px; background-color: <?php echo $color; ?>"></div>
 <form name="myForm" action="" method="post">
 <select name ="color" value="">
-     <option value="">Выберите цвет</option>
+     <option value="">Выберите цвет фона</option>
      <option value="red">Красный</option>
     <option value="blue">Синий</option>
     <option value="green">Зеленый</option>

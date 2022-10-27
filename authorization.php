@@ -10,7 +10,32 @@ if(isset($_SESSION['login'])) {
     $login = $_SESSION['login'];
     $page = $_SESSION['page'];
 }
+//доступы для подключения к бд
+$db_host = 'localhost';
+$db_user = 'root';
+$db_password = 'root';
+$db_db = 'city';
+$db_port = 8889;
 
+//Объектно-ориентированный стиль
+// $mysqli = new mysqli(
+//     $db_host,
+//     $db_user,
+//     $db_password,
+//     $db_db,
+// 	   $db_port
+//  );
+
+//процедурный стиль
+$mysqli = mysqli_connect($db_host, $db_user, $db_password, $db_db, $db_port);
+
+//$res = $mysqli->query("CREATE TABLE city_new(id INT, login CHAR(20), password CHAR(20))");  //создаем таблицу вручную (не получилось подключиться 
+// к БД в mamp)
+
+$sql = "SELECT login, password FROM `city_new`"; //создаем запрос для выборки столбцов логин и пароль из таблицы
+
+$users = mysqli_query($mysqli, $sql);
+$res = mysqli_fetch_all($users); //ициниализируем переменную  и в нее сохраняем данные из выборки (логины и пароли)
 
 ?>
 <!DOCTYPE html>
@@ -91,18 +116,32 @@ if(isset($_SESSION['login'])) {
 session_start();
 
 $name = $_POST['name'];
-$pass = md5($_POST['pass']);
+$pass = $_POST['pass'];
 
-$currentName = 'Anna'; //правильный логин
-$currentPassword = md5('password'); //правильный пароль
+//$currentName = 'Anna'; //правильный логин
+//$currentPassword = md5('password'); //правильный пароль
 
-if ($name && $pass) {
-    if($name == $currentName && $pass == $currentPassword) {
-        $_SESSION['login'] = $name;
-        header("Location: ./authorization.php");
-    }else {
-        header("Location: ./fail.php");
-    }
+if ($name && $pass) { 
+        //проходимся по массиву с логинами и паролями и сравниваем значения из $_POST c ними
+        //в случае успеха, ставим флаг
+        $success = false;
+        foreach ($res as $value) {
+            if($name == $value[0] && $pass == $value[1]){
+                $success = true;
+            }
+        }
+
+        if($success){
+            $_SESSION['login'] = $name;
+            header("Location: ./authorization.php");
+        }else {
+            header("Location: ./fail.php");
+        }
 }
 unset($_POST);
+
+//CREATE USER 'vika'@'localhost' IDENTIFIED BY 'password';
+
+//[0] => Mark
+//[1] => 432
 ?>

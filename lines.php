@@ -1,4 +1,5 @@
 <?php
+require_once 'Classes/Lines.php';
 ?>
 
 <!DOCTYPE html>
@@ -45,13 +46,8 @@ echo '<br>'
 . 'Дана строка. Если в этой строке более 5-ти символов - вырежьте из нее первые 5 символов, добавьте троеточие в конец и выведите на экран. Если же в этой строке 5 и менее символов - необходимо вывести эту строку на экран.'
 .'<br>';
 
-$str = "добавьте троеточие в конец";
-echo "Исходнач строка: $str" . '<br>';
-if (mb_strlen($str) < 5) {
-    echo $str;
-} else {
-    echo mb_substr($str, 0, 5) . '...' . '<br>'; 
-}
+$lines = new Lines();
+echo $lines->cutFiveSymbol();
 
 
 // Задача 2 слайд 20 (урок 7-8 PHP)
@@ -63,9 +59,7 @@ echo '<br>'
 . "Дана строка 'str2'. Замените в ней все буквы 'a' на цифру 1, буквы 'b' - на 2, а буквы 'c' - на 3."
 .'<br>';
 
-$str2 = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur delectus nostrum fuga blanditiis repellat distinctio quibusdam a harum veniam aut?";
-echo $str2 . '<br>';
-echo str_replace(['a', 'b', 'c'], ['1', '2', '3'], $str2) . '<br>';
+echo $lines->replaseLetter();
 
 
 // Задача 3 слайд 20 (урок 7-8 PHP)
@@ -77,10 +71,7 @@ echo '<br>'
 . "Дана строка 'abc abc abc'. Определите позицию последней буквы 'b'."
 .'<br>';
 
-$str3 = 'abc abc abc';
-$arr3 = mb_str_split($str3); // для наглядности: преобразуем строку в массив и выведем его на экран
-print_r($arr3) ; 
-echo '<br>' . "Позиция последней буквы 'b' - " . strrpos($str3, 'b') . '<br>';
+echo $lines->definePosition();
 
 
 // Задача 4 слайд 20 (урок 7-8 PHP)
@@ -92,10 +83,7 @@ echo '<br>'
 . "Дана строка 'html css php'. С помощью функции explode запишите каждое слово этой строки в отдельный элемент массива."
 .'<br>';
 
-$str4 = 'html css php';
-$arr4 = explode(' ', $str4);
-print_r($arr4);
-echo '<br>';
+echo $lines->explodeWord();
 
 
 // Задача 5 слайд 20 (урок 7-8 PHP)
@@ -108,12 +96,7 @@ echo '<br>'
 . 'В двух строках содержатся даты вида День-Месяц-Год (например, 10-02-2015). Определите количество дней между датами.'
 .'<br>';
 
-$birthDay = "20-07-1989";
-$interim = date("j-m-Y");
-$bDay = date_create('20-07-1989');
-$today = date_create($interim);
-$diff = date_diff($bDay, $today);
-echo $diff->format('%a дней') . " между $birthDay и $interim";
+echo $lines->numberDaysBetweenDates();
 
 include ('footer.php');
 

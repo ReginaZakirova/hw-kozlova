@@ -1,5 +1,5 @@
 <?php include ('header.php'); 
-
+require_once 'Classes/Calculate.php';
 if(isset($_COOKIE['color'])) {
      $color = $_COOKIE['color'];
 }
@@ -270,15 +270,6 @@ $html = '<main>
 </body>
 </html>';
 
-function calculateDate ($val) {
-     $interim = date("j-m-Y");
-     $bDay = date_create($val);
-     $today = date_create($interim);
-     $diff = date_diff($bDay, $today);
-     $array['interim'] = $interim;
-     $array['diff'] = $diff;
-     return $array;
-}
 
 $dom = new DOMDocument();
 
@@ -286,22 +277,13 @@ $dom->loadHTML($aboutCourse);
 $one = $dom->textContent;
 $arrTextOne = explode(' ', $one);
 
-foreach($arrTextOne as $kk => $val){
-     $element = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $val);
+$calc = new Calculate();
 
-     if ($element == '' || mb_strlen($val) <= 1 && $val != 'В') {
-          continue;
-     }
-     $arrEvenAndOdd[] = $val;
-}
 
-foreach ($arrEvenAndOdd as $kkk => $vvv) {
-     if($kkk % 2 == 0) {
-          $even[] = $vvv;
-     }else {
-          $odd[] = $vvv;
-     }
-}
+$even = $calc->calculateEvenOdd($arrTextOne)['even'];
+$odd = $calc->calculateEvenOdd($arrTextOne)['odd'];
+
+
 //окрашивание слов в разные цвета (четные и нечетные)
 foreach ($even as $value) {
      $aboutCourse = str_replace($value, "<i style='color:red'>$value</i>", $aboutCourse);
@@ -313,7 +295,7 @@ foreach ($odd as $value) {
 
 //окрашивание первой фразы в красный цвет
 $html = str_replace("Виктория Козлова", "<h1 class='name' style='color:red'>Виктория Козлова</h1>", $html);
-echo $html . $aboutCourse . $ostatokHtml ;
+echo $html . $aboutCourse . $ostatokHtml;
 
 
 $dom->loadHTML($html);
@@ -327,29 +309,8 @@ $arrTextThree = explode(' ', $three);
 
 $htmlAll = array_merge($arrTextOne, $arrTextThree, $arrText); //объединяем массивы в один для подсчета
 
-//функция подсчета количества слов и гласных букв
-function calculateCountWordsAndVowel($arr) {
-     $count = 0;
-     $vowelAll = 0;
-     foreach($arr as $val){
-          $element = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $val);
-          
-          if ($element == '') {
-               continue;
-          }
-          $remainder = str_ireplace(['у','е', 'а', 'о', 'э', 'ё', 'я', 'и', 'ю', 'a', 'e', 'i', 'o', 'u', 'y', ' '], '', $element);
-          $vowelElement = mb_strlen($element) - mb_strlen($remainder); 
-          $count ++;
-          $vowelAll += $vowelElement;
-          
-     }
-     $out['count'] = $count;
-     $out['vowel'] = $vowelAll;
-     return $out;
-}
-
-
-$result = calculateCountWordsAndVowel($htmlAll); //передаем в функцию $htmlAll и возвращаем результат функции в переменную
+//подсчет количества слов и гласных букв
+$result = $calc->calculateCountWordsAndVowel($htmlAll); //передаем в метод calculateCountWordsAndVowel $htmlAll и возвращаем результат функции в переменную
 
 echo '<br>'. "На странице: " . $result['count']. " слов";
 
@@ -358,7 +319,7 @@ echo "Гласных букв: " . $result['vowel'];
 echo '<br>';
 
 $birthDay = "20-07-1989";
-$diffAndInterin = calculateDate($birthDay); //передаем в функцию дату рождения и возвращаем в переменную результат функции
+$diffAndInterin = $calc->calculateDate($birthDay); //передаем в метод дату рождения и возвращаем в переменную результат функции
 echo $diffAndInterin['diff']->format('%a дней') . " между $birthDay и " . $diffAndInterin['interim']; //выводим результат задания
 ?>
 
